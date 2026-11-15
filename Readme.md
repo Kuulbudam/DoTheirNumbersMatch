@@ -1,84 +1,47 @@
-# Do Their Numbers Match?
+﻿# Do Their Numbers Match?
 
-A pilot audit of quantitative claims about Nigeria's economy. Each claim is traced to its primary comparator and given a verdict under a fixed seven rule order.
+A pilot audit of quantitative claims about Nigeria's economy, each traced to its primary comparator.
 
-Author: Trisma Kuulbudam  
-Event: Apart Research AI x Epistemics Research Sprint, 13 to 15 November 2026
-
-## Live page
-
-https://kuulbudam.github.io/DoTheirNumbersMatch/
-
-Open the link and click through it. No install is needed.
-
-Index of records. Records are grouped by the source they share. Records in one group are not independent confirmations.
-
-Workpaper. Select a record to see the claim, the comparator excerpt, the tie out and the decision ladder that shows which rule decided the verdict.
-
-Reviewer sign-off. Tick the four checks and add a note. Your ticks are saved in your own browser only.
-
-Exhibits. Three cross record exhibits recompute their arithmetic live from the inputs shown.
+**Live page:** https://kuulbudam.github.io/DoTheirNumbersMatch/
 
 ## Files
 
-| File | What it is |
-|---|---|
-| `index.html` | The live page. It is self contained and includes all the data. |
-| `claims_final.csv` | The claim comparator records, with verdicts, evidence status and notes. |
-| `build_all.py` | Builds index.html from claims_final.csv. |
-| `add_names.py` | Adds descriptive case names to the records in claims_final.csv. |
+- `index.html`  interactive audit-workpaper viewer (the live page)
+- `claims_final_revised_v2.csv`  dataset (source of truth)
+- `DoTheirNumbersMatch_Workbook.xlsx`  six-sheet workbook
+- `build_all.py`  regenerates `index.html` from the CSV
+- `report.md`  written report
 
-Python 3 is needed. Nothing else needs to be installed.
+## Verdict rules
 
-```bash
-python build_all.py            # builds index.html and opens it in your browser
-python build_all.py --serve    # builds, then serves it at http://127.0.0.1:8000/index.html
-python build_all.py --no-open  # builds only
-python build_all.py --only-verified   # hides provisional and unverifiable records
-```
+First rule that applies, in order:
 
-## How verdicts are decided
+1. Unverifiable
+2. Source does not support claim
+3. Definition mismatch
+4. Period mismatch
+5. Match
+6. Rounding difference
+7. Numerical discrepancy
 
-Each record gets the first rule that applies:
+## Evidence grades
 
-Unverifiable: the relevant figure cannot be located in the available evidence.
+- A  primary file opened
+- B  official statement via a secondary copy (Match at this grade is provisional)
+- C  not locatable in a primary source
 
-Source does not support claim: the cited source does not establish the statement.
+## Limitations
 
-Definition mismatch: different metric definitions or calculation conventions.
-
-Period mismatch: different periods, base dates or statistical vintages.
-
-Match: agrees at the stated precision.
-
-Rounding difference: consistent after reasonable rounding or approximate wording.
-
-Numerical discrepancy: a material difference remains after the checks above.
-
-Evidence grades: A the primary file was opened. B an official statement reproduced by a secondary source; a Match at this grade is provisional. C not locatable in a primary source.
-
-## Status and limits
-
-This is a small pilot. The counts describe this dataset only. They are not estimates of how accurate Nigerian public communications are.
-
-Natural and stress samples are reported separately and never pooled.
-
-Records that share a release, statement or series are counted as one source group.
-
-Single-annotator review. No agreement score is reported.
-
-No model evaluation was run.
-
-Labels describe how a statement relates to a comparator. They say nothing about a speaker's honesty or intent. Do not use this data to rank people or outlets.
-
-## Preexisting code
-
-No code in this repository was written before the sprint.
-
-## Ethics
-
-The data contains public statements, publication dates and public statistical releases only. There are no private communications or personal data. Names appear only to attribute a public statement in the speaker's public or professional capacity.
+- Small, selected pilot. Stress sample chosen for difficulty, reported separately.
+- Records in one source group share a release; row counts overstate independent evidence.
+- Single-annotator review. No agreement score.
+- No model evaluation. Dataset and procedure, not a measure of AI accuracy.
+- Labels describe claim-to-comparator relationship. Say nothing about honesty or intent.
 
 ## LLM use
 
-Claude (Anthropic) helped with drafting and taxonomy brainstorming.
+Claude (Anthropic) assisted with drafting, taxonomy brainstorming, preliminary source discovery, and the evaluation script. All numerical claims, classifications, and verbatim excerpts were independently verified against primary statistical files.
+
+## Citation
+
+Kuulbudam, T. (2026). Do Their Numbers Match? An Independent Audit of Quantitative Claims in Nigerian Government Communications. Apart Research AI x Epistemics Sprint.
